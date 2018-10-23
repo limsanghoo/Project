@@ -23,9 +23,9 @@ public class AddPurchaseAction extends Action {
 		System.out.println("purchaseVO : "+purchaseVO);
 		System.out.println("productVO : " +productVO);
 		
-		
+		System.out.println("개발자 GIT 테스트 문구");
 		productVO.setProdNo(Integer.parseInt(request.getParameter("prodNo") ) );
-		uVO.setUserId(request.getParameter("userId"));
+		//uVO.setUserId(request.getParameter("userId"));
 		purchaseVO.setPaymentOption(request.getParameter("paymentOption"));
 		purchaseVO.setReceiverName(request.getParameter("receiverName"));
 		purchaseVO.setReceiverPhone(request.getParameter("receiverPhone"));
