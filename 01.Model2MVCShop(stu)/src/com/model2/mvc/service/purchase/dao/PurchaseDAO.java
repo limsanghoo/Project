@@ -162,8 +162,7 @@ public class PurchaseDAO {
 	
 		public void insertPurchase(PurchaseVO purchaseVO) throws Exception {
 			
-			UserVO userVO = new UserVO();
-			ProductVO productVO = new ProductVO();
+			System.out.println("들어오냐");
 			
 			Connection con = DBUtil.getConnection();
 			
@@ -172,17 +171,17 @@ public class PurchaseDAO {
 			PreparedStatement stmt = con.prepareStatement(sql);
 			
 			
-			stmt.setInt(1, productVO.getProdNo());
-			stmt.setString(2, userVO.getUserId());
+			stmt.setInt(1, purchaseVO.getPurchaseProd().getProdNo());
+			stmt.setString(2, purchaseVO.getBuyer().getUserId());
 			stmt.setString(3, purchaseVO.getPaymentOption());
 			stmt.setString(4, purchaseVO.getReceiverName());
 			stmt.setString(5, purchaseVO.getReceiverPhone());
 			stmt.setString(6, purchaseVO.getDivyAddr());
 			stmt.setString(7,  purchaseVO.getDivyRequest());
 			stmt.setString(8, purchaseVO.getTranCode());
-			stmt.setDate(9, purchaseVO.getOrderDate());
-			stmt.setString(10, purchaseVO.getDivyDate());
+			stmt.setString(9, purchaseVO.getDivyDate());
 			
+			stmt.executeUpdate();
 		}
 		public void updatePurchase(PurchaseVO purchaseVO) throws Exception {
 			

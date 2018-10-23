@@ -53,7 +53,7 @@ function fncAddPurchase() {
 	</tr>
 </table>
 
-<input type="hidden" name="prodNo" value="10000" />
+<input type="hidden" name="prodNo" value="<%=productVO.getProdNo()%>" />
 
 <table width="600" border="0" cellspacing="0" cellpadding="0"	align="center" style="margin-top: 13px;">
 	<tr>
@@ -124,9 +124,10 @@ function fncAddPurchase() {
 			구매자아이디 <img 	src="/images/ct_icon_red.gif" width="3" height="3" align="absmiddle"/>
 		</td>
 		<td bgcolor="D6D6D6" width="1"></td>
-		<td class="ct_write01"><%=userVO.getUserId() %></td>
-		<input type="hidden" name="buyerId" value="admin" />
+		<td class="ct_write01"><%=userVO.getUserId()%> </td>
+		<input type="hidden" name="buyerId" value="<%=userVO.getUserId()%>" />
 	</tr>
+	
 	<tr>
 		<td height="1" colspan="3" bgcolor="D6D6D6"></td>
 	</tr>

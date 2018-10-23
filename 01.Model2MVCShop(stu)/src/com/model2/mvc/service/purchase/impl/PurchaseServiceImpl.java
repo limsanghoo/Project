@@ -13,9 +13,16 @@ public class PurchaseServiceImpl implements PurchaseService {
 	
 	private PurchaseDAO dao;
 	private ProductDAO prodDAO;
+	
+	
+	public PurchaseServiceImpl() {
+		dao = new PurchaseDAO();
+	}
+	
 	@Override
 	public void addPurchase(PurchaseVO purchaseVO) throws Exception {
-		// TODO Auto-generated method stub
+		
+	dao.insertPurchase(purchaseVO);
 		
 	}
 	@Override
