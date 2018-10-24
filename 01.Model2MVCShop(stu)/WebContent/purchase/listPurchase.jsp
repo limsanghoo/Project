@@ -1,6 +1,40 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="EUC-KR"%>
 
+<%@ page import="java.util.*"  %>
+<%@ page import="com.model2.mvc.service.product.vo.*" %>
+<%@ page import="com.model2.mvc.service.user.vo.*" %>
+<%@ page import="com.model2.mvc.common.*" %>
+<%@ page import="com.model2.mvc.service.purchase.vo.*" %>
+
+
+  <%
+  HashMap<String,Object> map=(HashMap<String,Object>)request.getAttribute("map");
+	SearchVO searchVO=(SearchVO)request.getAttribute("searchVO");
+	String menu = request.getParameter("menu");
+
+	
+	int total=0;
+	ArrayList<PurchaseVO> list=null;
+	if(map != null){
+		total=((Integer)map.get("count")).intValue();
+		list=(ArrayList<PurchaseVO>)map.get("list");
+	}
+	
+
+	int currentPage=searchVO.getPage();
+
+	
+	
+	int totalPage=0;
+	if(total > 0) {
+		totalPage= total / searchVO.getPageUnit() ;
+		if(total%searchVO.getPageUnit() >0)
+			totalPage += 1; 
+	}
+	
+	
+%>	
  
 <html>
 <head>
@@ -37,7 +71,7 @@
 
 <table width="100%" border="0" cellspacing="0" cellpadding="0"	style="margin-top: 10px;">
 	<tr>
-		<td colspan="11">전체 1 건수, 현재 1 페이지</td>
+		<td colspan="11">전체 <%= total %> 건수, 현재 <%=currentPage%> 페이지</td>
 	</tr>
 	<tr>
 		<td class="ct_list_b" width="100">No</td>
@@ -55,26 +89,34 @@
 	<tr>
 		<td colspan="11" bgcolor="808285" height="1"></td>
 	</tr>
-
+		
+		<% 	
+		int no=list.size();
+		for(int i=0; i<list.size(); i++) {
+		PurchaseVO purchaseVO  = (PurchaseVO)list.get(i);
+		
+	%>
+	
 	
 	
 	<tr class="ct_list_pop">
-		<td align="center">
-			<a href="/getPurchase.do?tranNo=10188">1</a>
+		<td align="center"><%=no--%></td>
+			<a href="/getPurchase.do?tranNo=<%=purchaseVO.getTranNo() %>"><%=purchaseVO.getTranNo() %></a>
 		</td>
 		<td></td>
 		<td align="left">
-			<a href="/getUser.do?userId=user21">user21</a>
+			<a href="/getUser.do?userId=<%=purchaseVO.getBuyer()%>"><%=purchaseVO.getBuyer()%></a>
 		</td>
 		<td></td>
-		<td align="left">SCOTT</td>
+		<td align="left"><%=purchaseVO.getReceiverName()%></td>
 		<td></td>
-		<td align="left">null</td>
+		<td align="left"><%=purchaseVO.getReceiverPhone()%></td>
 		<td></td>
-		<td align="left">현재
-				
-					구매완료
-				상태 입니다.</td>
+		<td align="left">
+		
+		<%=purchaseVO.getTranCode()%>
+		<%	}%>	
+					</td>
 		<td></td>
 		<td align="left">
 			

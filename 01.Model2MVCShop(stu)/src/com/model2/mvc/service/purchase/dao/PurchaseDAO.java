@@ -50,11 +50,12 @@ public class PurchaseDAO {
 	}
 
 	
-	public HashMap<String, Object> getPurchaseList(SearchVO searchVO) throws Exception {
+	public HashMap<String, Object> getPurchaseList(SearchVO searchVO, String buyerId) throws Exception {
 		
 		Connection con = DBUtil.getConnection();
 		
-		String sql = "select*from TRANSACTION";
+		String sql = "select*from TRANSACTION"
+											+ "WHERE buyer_id ='"+buyerId+"'";
 		
 		PreparedStatement stmt = 
 				con.prepareStatement(	sql,
@@ -78,13 +79,14 @@ public class PurchaseDAO {
 				for (int i = 0; i < searchVO.getPageUnit(); i++) {
 					PurchaseVO purchaseVO = new PurchaseVO();
 					
-					purchaseVO.setPaymentOption(rs.getString("PAYMENT_OTPION"));
+					
+					
 					purchaseVO.setReceiverName(rs.getString("RECEIVER_NAME"));
 					purchaseVO.setReceiverPhone(rs.getString("RECEIVER_PHONE"));
-					purchaseVO.setDivyAddr(rs.getString("DEMAIL_ADDR"));
+
 					purchaseVO.setDivyRequest(rs.getString("DLVY_REQUEST"));
 					purchaseVO.setTranCode(rs.getString("TRAN_STATUS_CODE"));
-					purchaseVO.setOrderDate(rs.getDate("ORDER_DATE"));
+
 					purchaseVO.setDivyDate(rs.getString("DLVY_DATE"));
 					purchaseVO.setTranNo(rs.getInt("TRAN_NO"));
 					
@@ -162,7 +164,7 @@ public class PurchaseDAO {
 	
 		public void insertPurchase(PurchaseVO purchaseVO) throws Exception {
 			
-			System.out.println("들어오냐");
+			
 			
 			Connection con = DBUtil.getConnection();
 			

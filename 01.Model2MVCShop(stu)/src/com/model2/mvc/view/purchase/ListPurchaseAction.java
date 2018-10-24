@@ -4,6 +4,7 @@ import java.util.HashMap;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.model2.mvc.common.SearchVO;
 import com.model2.mvc.framework.Action;
@@ -13,12 +14,25 @@ import com.model2.mvc.service.user.UserService;
 import com.model2.mvc.service.user.impl.UserServiceImpl;
 import com.model2.mvc.service.user.vo.UserVO;
 
-	public class ListpurchaseAction extends Action {
+	public class ListPurchaseAction extends Action {
 		
 		public String execute(	HttpServletRequest request,
 				HttpServletResponse response) throws Exception {
     
 		SearchVO searchVO=new SearchVO();
+		
+		HttpSession session = request.getSession();
+		
+		UserVO userVO = (UserVO)session.getAttribute("user");
+
+		System.out.println("userVO : " +userVO);
+		
+		String buyerId = userVO.getUserId();
+		
+		System.out.println("buyer : "+userVO);
+		System.out.println("buyerId " +buyerId);
+		
+		
 		
 		int page=1;
 		if(request.getParameter("page") != null)
@@ -29,12 +43,13 @@ import com.model2.mvc.service.user.vo.UserVO;
 		String pageUnit=getServletContext().getInitParameter("pageSize");
 		searchVO.setPageUnit(Integer.parseInt(pageUnit));
 		
-		String buyerId = request.getParameter("buyerId");
-		System.out.println("buyerId : " + buyerId);
-		UserVO userVO = new UserVO();
+		
+
+		
 		
 		UserService userService = new UserServiceImpl();
-		userVO = userService.getUser(buyerId);
+		//userVO = userService.getUser(buyerId);
+		System.out.println("userVO : "+userVO);
 		
 		PurchaseService service=new PurchaseServiceImpl();
 		HashMap<String,Object> map=service.getPurchaseList(searchVO, buyerId);
@@ -42,6 +57,7 @@ import com.model2.mvc.service.user.vo.UserVO;
 		request.setAttribute("map", map);
 		request.setAttribute("searchVO", searchVO);
 		
-		return  "forward:/purchase/listPurchasejsp";
+	
+		return  "forward:/purchase/listPurchase.jsp";
 	}
 }
