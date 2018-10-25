@@ -100,23 +100,22 @@
 	
 	
 	<tr class="ct_list_pop">
-		<td align="center"><%=no--%></td>
-			<a href="/getPurchase.do?tranNo=<%=purchaseVO.getTranNo() %>"><%=purchaseVO.getTranNo() %></a>
-		</td>
+		<td align="center"><a href="/getPurchase.do?tranNo=<%=purchaseVO.getTranNo() %>"><%=no--%></a></td>
+
 		<td></td>
 		<td align="left">
-			<a href="/getUser.do?userId=<%=purchaseVO.getBuyer()%>"><%=purchaseVO.getBuyer()%></a>
+			<a href="/getUser.do?userId=<%=purchaseVO.getBuyer().getUserId()%>"><%=purchaseVO.getBuyer().getUserId()%></a>
 		</td>
 		<td></td>
 		<td align="left"><%=purchaseVO.getReceiverName()%></td>
 		<td></td>
 		<td align="left"><%=purchaseVO.getReceiverPhone()%></td>
-		<td></td>
-		<td align="left">
+		<td></td>			
 		
-		<%=purchaseVO.getTranCode()%>
-		<%	}%>	
-					</td>
+	
+		
+	
+					
 		<td></td>
 		<td align="left">
 			
@@ -125,7 +124,7 @@
 	<tr>
 		<td colspan="11" bgcolor="D6D7D6" height="1"></td>
 	</tr>
-	
+		<%	}%>	
 </table>
 
 <table width="100%" border="0" cellspacing="0" cellpadding="0" style="margin-top: 10px;">

@@ -28,23 +28,33 @@ public class PurchaseDAO {
 		
 		PurchaseVO purchaseVO = null;
 		
+		
 		while(rs.next()) {
 			
 		purchaseVO = new PurchaseVO();	
+		ProductVO purchaseProd = new ProductVO();
+		purchaseProd.setProdNo(rs.getInt("PROD_NO"));
+		
+		UserVO buyer = new UserVO();
+		buyer.setUserId(rs.getString("BUYER_ID"));
 		
 		
-		purchaseVO.setPaymentOption(rs.getString("PAYMENT_OTPION"));
+		purchaseVO.setPaymentOption(rs.getString("PAYMENT_OPTION"));
 		purchaseVO.setReceiverName(rs.getString("RECEIVER_NAME"));
 		purchaseVO.setReceiverPhone(rs.getString("RECEIVER_PHONE"));
-		purchaseVO.setDivyAddr(rs.getString("DEMAIL_ADDR"));
+		purchaseVO.setDivyAddr(rs.getString("DEMAILADDR"));
 		purchaseVO.setDivyRequest(rs.getString("DLVY_REQUEST"));
 		purchaseVO.setTranCode(rs.getString("TRAN_STATUS_CODE"));
-		purchaseVO.setOrderDate(rs.getDate("ORDER_DATE"));
+		purchaseVO.setOrderDate(rs.getDate("ORDER_DATA"));
 		purchaseVO.setDivyDate(rs.getString("DLVY_DATE"));
 		purchaseVO.setTranNo(rs.getInt("TRAN_NO"));
+		purchaseVO.setBuyer(buyer);
+		purchaseVO.setPurchaseProd(purchaseProd);
 		
+	
 		
 	}
+		System.out.println("È®ÀÎ¿ë :" +purchaseVO);
 		con.close();
 		return purchaseVO;
 	}
@@ -55,12 +65,13 @@ public class PurchaseDAO {
 		Connection con = DBUtil.getConnection();
 		
 		String sql = "select*from TRANSACTION"
-											+ "WHERE buyer_id ='"+buyerId+"'";
+											+ " WHERE buyer_id ='"+buyerId+"'";
 		
 		PreparedStatement stmt = 
 				con.prepareStatement(	sql,
 															ResultSet.TYPE_SCROLL_INSENSITIVE,
 															ResultSet.CONCUR_UPDATABLE);
+		
 			ResultSet rs = stmt.executeQuery();
 
 			rs.last();
@@ -78,9 +89,11 @@ public class PurchaseDAO {
 			if (total > 0) {
 				for (int i = 0; i < searchVO.getPageUnit(); i++) {
 					PurchaseVO purchaseVO = new PurchaseVO();
+					UserVO buyer = new UserVO();
+					buyer.setUserId(rs.getString("BUYER_ID"));
+					System.out.println("buyer : " + buyer);
 					
-					
-					
+					purchaseVO.setBuyer(buyer);
 					purchaseVO.setReceiverName(rs.getString("RECEIVER_NAME"));
 					purchaseVO.setReceiverPhone(rs.getString("RECEIVER_PHONE"));
 
@@ -190,7 +203,7 @@ public class PurchaseDAO {
 			Connection con = DBUtil.getConnection();
 			
 			String sql =  "UPDATE TRANSACTION  set"
-					+ "payment_option=?, receiver_name=?, receiver_phone=?, demailaddr=?, dlvy_request=?,order_data=?,dlvy_date=?"
+					+ "buyer_id=?, payment_option=?, receiver_name=?, receiver_phone=?, demailaddr=?, dlvy_request=?,dlvy_date=?"
 					+ " where tran_no=?";
 			
 			PreparedStatement stmt = con.prepareStatement(sql);
