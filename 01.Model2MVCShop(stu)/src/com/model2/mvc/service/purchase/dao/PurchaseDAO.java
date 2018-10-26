@@ -11,6 +11,8 @@ import com.model2.mvc.common.SearchVO;
 import com.model2.mvc.common.util.DBUtil;
 import com.model2.mvc.service.product.vo.ProductVO;
 import com.model2.mvc.service.purchase.vo.PurchaseVO;
+import com.model2.mvc.service.user.UserService;
+import com.model2.mvc.service.user.impl.UserServiceImpl;
 import com.model2.mvc.service.user.vo.UserVO;
 
 public class PurchaseDAO {
@@ -201,32 +203,44 @@ public class PurchaseDAO {
 			stmt.executeUpdate();
 		}
 		public void updatePurchase(PurchaseVO purchaseVO) throws Exception {
+			System.out.println("날아왔어요");
+			System.out.println("두번쨰확인 :::" +purchaseVO);
 			
 			Connection con = DBUtil.getConnection();
-			
-			String sql =  "UPDATE TRANSACTION  set"
-					+ "buyer_id=?, payment_option=?, receiver_name=?, receiver_phone=?, demailaddr=?, dlvy_request=?,dlvy_date=?"
-					+ " where tran_no=?";
-			
 		
 			
+			String sql =  "UPDATE TRANSACTION  set"
+					+ " payment_option=?, receiver_name=?, receiver_phone=?, demailaddr=?, dlvy_request=?,dlvy_date=?"
+					+ " where tran_no=?";
+			
 			PreparedStatement stmt = con.prepareStatement(sql);
-			ResultSet rs = stmt.executeQuery();
 			
-			UserVO buyer = new UserVO();
-			buyer.setUserId(rs.getString("BUYER_ID"));
-			System.out.println("업데이트 확인: " +buyer);
+			System.out.println("쿼리준비완료");
 			
-			//stmt.setString(1, purchaseVO.getBuyer());
-			stmt.setString(2, purchaseVO.getPaymentOption());
-			stmt.setString(3, purchaseVO.getReceiverName());
-			stmt.setString(4,  purchaseVO.getReceiverPhone());
-			stmt.setString(5, purchaseVO.getDivyAddr());
-			stmt.setString(6,  purchaseVO.getDivyRequest());
-			stmt.setDate(7, purchaseVO.getOrderDate());
-			stmt.setString(8,  purchaseVO.getDivyDate());
+			System.out.println("sql :"+sql);
+			
+			
+	
+			
+			stmt.setString(1, purchaseVO.getPaymentOption());
+			stmt.setString(2, purchaseVO.getReceiverName());
+			stmt.setString(3,  purchaseVO.getReceiverPhone());
+			stmt.setString(4, purchaseVO.getDivyAddr());
+			stmt.setString(5,  purchaseVO.getDivyRequest());
+			stmt.setString(6,  purchaseVO.getDivyDate());
+			stmt.setInt(7, purchaseVO.getTranNo());
+		
+			System.out.println("sql 2번쨰 확인 :" +sql);
 			
 			stmt.executeUpdate();
+		
+	
+			
+			
+			
+			
+			System.out.println("dao 확인 : "+sql);
+			
 			
 			con.close();
 		}

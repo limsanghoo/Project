@@ -46,7 +46,7 @@ public class PurchaseServiceImpl implements PurchaseService {
 		return dao.getSaleList(searchVO);
 	}
 	@Override
-	public void updatePurcahse(PurchaseVO purchaseVO) throws Exception {
+	public void updatePurchase(PurchaseVO purchaseVO) throws Exception {
 		dao.updatePurchase(purchaseVO);
 		
 	}

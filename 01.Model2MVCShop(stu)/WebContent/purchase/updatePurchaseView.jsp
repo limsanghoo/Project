@@ -24,7 +24,7 @@
 
 <body bgcolor="#ffffff" text="#000000">
 
-<form name="updatePurchase" method="post"	action="/updatePurchase.do?tranNo=10188">
+<form name="updatePurchase" method="post"	action="/updatePurchase.do?tranNo=<%=purchaseVO.getTranNo()%>">
 
 <table width="100%" height="37" border="0" cellpadding="0" cellspacing="0">
 	<tr>
@@ -78,7 +78,7 @@
 		<td bgcolor="D6D6D6" width="1"></td>
 		<td class="ct_write01">
 			<input 	type="text" name="receiverName" 	class="ct_input_g" style="width: 100px; height: 19px" 
-							maxLength="20" value=<%=purchaseVO.getReceiverName() %> />
+							maxLength="20" value="<%=purchaseVO.getReceiverName() %>" />
 		</td>
 	</tr>
 	<tr>
@@ -89,7 +89,7 @@
 		<td bgcolor="D6D6D6" width="1"></td>
 		<td class="ct_write01">
 			<input 	type="text" name="receiverPhone" class="ct_input_g" style="width: 100px; height: 19px" 
-							maxLength="20" value=<%=purchaseVO.getReceiverPhone() %> />
+							maxLength="20" value="<%=purchaseVO.getReceiverPhone() %>" />
 		</td>
 	</tr>
 
@@ -101,7 +101,7 @@
 		<td bgcolor="D6D6D6" width="1"></td>
 		<td class="ct_write01">
 			<input 	type="text" name="receiverAddr" class="ct_input_g" style="width: 100px; height: 19px" 
-							maxLength="20" value=<%=purchaseVO.getDivyAddr() %> />
+							maxLength="20" value="<%=purchaseVO.getDivyAddr() %>" />
 		</td>
 	</tr>
 	<tr>
@@ -112,7 +112,7 @@
 		<td bgcolor="D6D6D6" width="1"></td>
 		<td class="ct_write01">
 			<input 	type="text" name="receiverRequest" 	class="ct_input_g" style="width: 100px; height: 19px" 
-							maxLength="20" value=<%=purchaseVO.getDivyRequest() %>/>
+							maxLength="20" value="<%=purchaseVO.getDivyRequest() %>"/>
 		</td>
 	</tr>
 	<tr>

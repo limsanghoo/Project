@@ -9,10 +9,11 @@
 
     
   <%
-	ProductVO productVO = (ProductVO)request.getAttribute("productVO");
-	UserVO userVO = (UserVO)session.getAttribute("user");
-	String menu = request.getParameter("menu");
-	PurchaseVO purchaseVO =(PurchaseVO)request.getAttribute("purchaseVO");
+	
+ 	 PurchaseVO purchaseVO =(PurchaseVO)request.getAttribute("purchaseVO");
+  	ProductVO productVO = purchaseVO.getPurchaseProd();
+	UserVO userVO = purchaseVO.getBuyer();
+	
 %>	
 
 
@@ -42,42 +43,32 @@
 	</tr>
 	<tr>
 		<td>구매방법</td>
-		<td>
-		
-
-
-		
-		현금구매
-		
-		
-		
-				
-		</td>
+		<td><%=purchaseVO.getPaymentOption() %></td>
 		<td></td>
 	</tr>
 	<tr>
 		<td>구매자이름</td>
-		<td><%=userVO.getUserName() %></td>
+		<td><%=purchaseVO.getReceiverName() %></td>
 		<td></td>
 	</tr>
 	<tr>
 		<td>구매자연락처</td>
-		<td><%=userVO.getPhone() %></td>
+		<td><%=purchaseVO.getReceiverPhone() %></td>
 		<td></td>
 	</tr>
 	<tr>
 		<td>구매자주소</td>
-		<td><%=userVO.getAddr() %></td>
+		<td><%=purchaseVO.getDivyAddr() %></td>
 		<td></td>
 	</tr>
 		<tr>
 		<td>구매요청사항</td>
-		<td><%=productVO.getProdDetail() %></td>
+		<td><%=purchaseVO.getDivyRequest() %></td>
 		<td></td>
 	</tr>
 	<tr>
 		<td>배송희망일자</td>
-		<td><%=purchaseVO.getOrderDate() %></td>
+		<td><%=purchaseVO.getDivyDate() %></td>
 		<td></td>
 	</tr>
 </table>

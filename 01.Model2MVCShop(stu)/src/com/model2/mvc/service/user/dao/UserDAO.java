@@ -32,6 +32,7 @@ public class UserDAO {
 		stmt.setString(7, userVO.getEmail());
 		stmt.executeUpdate();
 		
+	
 		con.close();
 	}
 
@@ -139,7 +140,7 @@ public class UserDAO {
 		stmt.setString(4, userVO.getEmail());
 		stmt.setString(5, userVO.getUserId());
 		stmt.executeUpdate();
-		
+		System.out.println("UserSql :"+sql);
 		con.close();
 	}
 }
