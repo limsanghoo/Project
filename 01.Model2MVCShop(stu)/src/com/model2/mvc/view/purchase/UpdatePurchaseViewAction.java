@@ -22,8 +22,7 @@ public class UpdatePurchaseViewAction extends Action {
 		PurchaseVO purchaseVO=service.getPurchase(tranNo);
 		
 		request.setAttribute("PurchaseVO", purchaseVO);
-		
+		System.out.println("===============================");
 		return "forward:/purchase/updatePurchaseView.jsp";
-		
 	}
 }
