@@ -248,17 +248,12 @@ public class PurchaseDAO {
 		public void updateTranCode(PurchaseVO purchaseVO) throws Exception{
 			
 			Connection con = DBUtil.getConnection();
-			String sql = "UPDATE TRANSATION set payment_option=?,receiver_name=?,receiver_phone=?,demailaddr=?,dlvy_requset=?,dlvy_date=?"
-					+ " where tran_no =?";
+			String sql = "UPDATE TRANSACTION set TRAN_STATUS_CODE=? where PROD_NO=?";
 					
 			PreparedStatement stmt = con.prepareStatement(sql);
-			stmt.setString(1, purchaseVO.getPaymentOption());
-			stmt.setString(2, purchaseVO.getReceiverName());
-			stmt.setString(3, purchaseVO.getReceiverPhone());
-			stmt.setString(4, purchaseVO.getDivyAddr());
-			stmt.setString(5, purchaseVO.getDivyRequest());
-			stmt.setDate(6, Date.valueOf(purchaseVO.getDivyDate()));
-			stmt.setInt(7, purchaseVO.getTranNo());
+			
+			stmt.setString(1, purchaseVO.getTranCode());
+			stmt.setInt(2, purchaseVO.getPurchaseProd().getProdNo());
 			
 			stmt.executeUpdate();
 			con.close();

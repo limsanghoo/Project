@@ -31,8 +31,16 @@
 		totalPage= total / searchVO.getPageUnit() ;
 		if(total%searchVO.getPageUnit() >0)
 			totalPage += 1; 
+		
+		
+		
 	}
 	
+	String role="";
+	if(request.getSession().getAttribute("user")!=null) {
+		role=((UserVO)request.getSession().getAttribute("user")).getRole();
+	}
+
 	
 %>	
  
@@ -112,12 +120,15 @@
 		<td align="left"><%=purchaseVO.getReceiverPhone()%></td>
 		<td></td>			
 		
+		
+		
 		<td align="left"> 현재 <%=purchaseVO.getTranCode()%> 상태입니다. </td>
 
 		<td></td>
 		<td align="left"><%=(purchaseVO.getTranCode().equals("배송중"))  ?"<a herf=\"/updateTranCode.do?tranNo="+purchaseVO.getTranNo()+"&trancode=3\"물건도착</a>" :""%></td>
 		
 	</tr>
+	 
 	<tr>
 		<td colspan="11" bgcolor="D6D7D6" height="1"></td>
 	</tr>
