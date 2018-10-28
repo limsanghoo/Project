@@ -112,13 +112,14 @@
 		<td align="left"><%=purchaseVO.getReceiverPhone()%></td>
 		<td></td>			
 		
-	
-		
-	
-					
+		<td align="left">현재
+				
+					배송완료
+				상태 입니다.</td>
+			
 		<td></td>
 		<td align="left">
-			
+		
 		</td>
 	</tr>
 	<tr>

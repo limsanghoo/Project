@@ -200,7 +200,12 @@ function fncGetProductList(){
 		<td align="left"><%= vo.getPrice() %></td>
 		<td></td>
 		<td align="left"><%= vo.getRegDate() %></td>
-	
+		<td></td>
+		<td align="left">
+			
+			구매완료
+			
+					<a herf=" /updateTranCodeByProd.do?prodNo=<%=vo.getProdNo() %>&tranCode=2">배송하기</a>
 	
 	</tr>
 	<tr>
