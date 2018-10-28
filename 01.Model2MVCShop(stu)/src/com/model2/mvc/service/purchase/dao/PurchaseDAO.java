@@ -1,6 +1,7 @@
 package com.model2.mvc.service.purchase.dao;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
@@ -247,12 +248,20 @@ public class PurchaseDAO {
 		public void updateTranCode(PurchaseVO purchaseVO) throws Exception{
 			
 			Connection con = DBUtil.getConnection();
-			String sql = "UPDATE TRANSATION set tran_no=?";
+			String sql = "UPDATE TRANSATION set payment_option=?,receiver_name=?,receiver_phone=?,demailaddr=?,dlvy_requset=?,dlvy_date=?"
+					+ " where tran_no =?";
 					
 			PreparedStatement stmt = con.prepareStatement(sql);
-			stmt.setInt(1, purchaseVO.getTranNo());
+			stmt.setString(1, purchaseVO.getPaymentOption());
+			stmt.setString(2, purchaseVO.getReceiverName());
+			stmt.setString(3, purchaseVO.getReceiverPhone());
+			stmt.setString(4, purchaseVO.getDivyAddr());
+			stmt.setString(5, purchaseVO.getDivyRequest());
+			stmt.setDate(6, Date.valueOf(purchaseVO.getDivyDate()));
+			stmt.setInt(7, purchaseVO.getTranNo());
 			
 			stmt.executeUpdate();
 			con.close();
 		}
+		
 }

@@ -3,6 +3,10 @@
 <%@ page import="java.util.*"  %>
 <%@ page import="com.model2.mvc.service.product.vo.*" %>
 <%@ page import="com.model2.mvc.common.*" %>
+<%@ page import="com.model2.mvc.service.user.vo.*" %>
+<%@ page import="com.model2.mvc.service.purchase.vo.*" %>
+<%@ page import="com.model2.mvc.service.purchase.impl.*" %>
+<%@ page import="com.model2.mvc.service.purchase.*" %>
 
 <% 
 	HashMap<String,Object> map=(HashMap<String,Object>)request.getAttribute("map");
@@ -27,7 +31,15 @@
 		totalPage= total / searchVO.getPageUnit() ;
 		if(total%searchVO.getPageUnit() >0)
 			totalPage += 1; 
+		
+		}	
+	
+	String role = "";
+	
+	if(request.getSession().getAttribute("user") !=null) {
+		role=((UserVO)request.getSession().getAttribute("user")).getRole();
 	}
+		
 	%>
 
 <html>
@@ -92,7 +104,7 @@ function fncGetProductList(){
 				
 			
 				<%
-				if(searchVO.getSearchCondition().equals("0")){
+				if(searchVO.getSearchCondition().equals("0")) {
 				%>
 				
 				<option value="0" selected>상품번호</option>
@@ -100,7 +112,7 @@ function fncGetProductList(){
 				<option value="2">상품가격</option> 
 				
 				<%
-				}else if(searchVO.getSearchCondition().equals("1")){
+				}else if(searchVO.getSearchCondition().equals("1")) {
 				%>
 				
 				<option value="0" >상품번호</option>
@@ -129,7 +141,7 @@ function fncGetProductList(){
 		
 				<option value="0" >상품번호</option>
 				<option value="1" >상품명</option>
-				<option value="2" selected>상품가격</option>
+				<option value="2" >상품가격</option>
 				
 					</select>
 				<input type="text" name="searchKeyword"   class="ct_input_g" style="width:200px; height:19px" />
@@ -137,6 +149,8 @@ function fncGetProductList(){
 			<%
 			} 
 			%>
+			
+		
 		
 		<td align="right" width="70">
 			<table border="0" cellspacing="0" cellpadding="0">
@@ -191,22 +205,23 @@ function fncGetProductList(){
 		
 			<% if (menu.equals("manage") ) { %>
 			<a href="/updateProductView.do?prodNo=<%= vo.getProdNo() %>&menu=<%= menu %>"><%= vo.getProdName() %></a>
-			<% }else { %>
-			<a href="/getProduct.do?prodNo=<%= vo.getProdNo() %>&menu=<%=menu %>"><%=vo.getProdName() %>
-			<% } %>
 			
+				<% } %>
 			</td>
 		<td></td>
 		<td align="left"><%= vo.getPrice() %></td>
 		<td></td>
 		<td align="left"><%= vo.getRegDate() %></td>
 		<td></td>
-		<td align="left">
-			
-			구매완료
-			
-					<a herf=" /updateTranCodeByProd.do?prodNo=<%=vo.getProdNo() %>&tranCode=2">배송하기</a>
-	
+				<% if(role.equals("admin")) { %>
+					<%System.out.println("나는 어드민입니다"); %>
+					<%
+					}else {
+					%>
+					<%System.out.println("나는 유저입니다"); %>
+				<% }%>	
+		
+
 	</tr>
 	<tr>
 		<td colspan="11" bgcolor="D6D7D6" height="1"></td>
@@ -224,10 +239,10 @@ function fncGetProductList(){
 		%>
 			<a href="/listProduct.do?menu=<%= menu %>&page=<%=i%>&searchCondition=<%=searchVO.getSearchCondition() %>
 			&searchKeyword=<%=searchVO.getSearchKeyword() %>"onclick="javascript:fncGetProductList();"><%=i %></a>
-		<%
-		}
-		%>
 		
+		<% }%>	
+		
+	
 		
 	
 		

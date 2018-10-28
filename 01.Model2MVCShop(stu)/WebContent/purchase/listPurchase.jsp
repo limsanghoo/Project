@@ -112,15 +112,11 @@
 		<td align="left"><%=purchaseVO.getReceiverPhone()%></td>
 		<td></td>			
 		
-		<td align="left">현재
-				
-					배송완료
-				상태 입니다.</td>
-			
+		<td align="left"> 현재 <%=purchaseVO.getTranCode()%> 상태입니다. </td>
+
 		<td></td>
-		<td align="left">
+		<td align="left"><%=(purchaseVO.getTranCode().equals("배송중"))  ?"<a herf=\"/updateTranCode.do?tranNo="+purchaseVO.getTranNo()+"&trancode=3\"물건도착</a>" :""%></td>
 		
-		</td>
 	</tr>
 	<tr>
 		<td colspan="11" bgcolor="D6D7D6" height="1"></td>
@@ -131,9 +127,15 @@
 <table width="100%" border="0" cellspacing="0" cellpadding="0" style="margin-top: 10px;">
 	<tr>
 		<td align="center">
-		 
-			<a href="/listPurchase.do?page=1">1</a> 
 		
+		<%
+			for(int i=1;i<totalPage;i++) {
+		%>
+		 
+			<a href="/listPurchase.do?page=<%=i%>"><%=i%></a> 
+		<%
+			}
+		%>
 		</td>
 	</tr>
 </table>
