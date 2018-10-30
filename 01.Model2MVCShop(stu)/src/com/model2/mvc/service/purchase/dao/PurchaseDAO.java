@@ -63,7 +63,64 @@ public class PurchaseDAO {
 		con.close();
 		return purchaseVO;
 	}
-
+	public PurchaseVO findPurchase2(int prodNo) throws Exception {
+		Connection con = DBUtil.getConnection();
+		
+		String sql = "SELECT * FROM users u, product p, transaction t WHERE t.prod_no=? AND u.user_id=t.buyer_id AND p.prod_no=t.prod_no";
+		
+		PreparedStatement stmt = con.prepareStatement(sql);
+		stmt.setInt(1, prodNo);
+		
+		ResultSet rs = stmt.executeQuery();
+					
+			PurchaseVO purchaseVO = null;
+			while (rs.next()) {
+				purchaseVO = new PurchaseVO();
+				
+				ProductVO productVO = new ProductVO();
+				productVO.setProdNo(rs.getInt("PROD_NO"));
+				productVO.setProdName(rs.getString("PROD_NAME"));
+				productVO.setProdDetail(rs.getString("PROD_DETAIL"));
+				productVO.setManuDate(rs.getString("MANUFACTURE_DAY"));
+				productVO.setPrice(rs.getInt("PRICE"));
+				productVO.setFileName(rs.getString("IMAGE_FILE"));
+				productVO.setRegDate(rs.getDate("REG_DATE"));
+				purchaseVO.setPurchaseProd(productVO);
+				
+			
+				UserVO userVO = new UserVO();
+				userVO.setUserId(rs.getString("USER_ID"));
+				userVO.setUserName(rs.getString("USER_NAME"));
+				userVO.setPassword(rs.getString("PASSWORD"));
+				userVO.setRole(rs.getString("ROLE"));
+				userVO.setSsn(rs.getString("SSN"));
+				userVO.setPhone(rs.getString("CELL_PHONE"));
+				userVO.setAddr(rs.getString("ADDR"));
+				userVO.setEmail(rs.getString("EMAIL"));
+				userVO.setRegDate(rs.getDate("REG_DATE"));
+				purchaseVO.setBuyer(userVO);
+				
+				purchaseVO.setTranNo(rs.getInt("TRAN_NO"));
+				purchaseVO.setPaymentOption(rs.getString("PAYMENT_OPTION"));
+				purchaseVO.setReceiverName(rs.getString("RECEIVER_NAME"));
+				purchaseVO.setReceiverPhone(rs.getString("RECEIVER_PHONE"));
+				purchaseVO.setDivyAddr(rs.getString("DEMAILADDR"));
+				purchaseVO.setDivyRequest(rs.getString("DLVY_REQUEST"));
+				purchaseVO.setTranCode(rs.getString("TRAN_STATUS_CODE"));
+				purchaseVO.setOrderDate(rs.getDate("ORDER_DATA"));
+				Date date = rs.getDate("DLVY_DATE");
+				
+				if (date!=null)
+					purchaseVO.setDivyDate(date.toString());
+				else
+					purchaseVO.setDivyDate("");
+			}
+			
+			con.close();
+		
+		return purchaseVO;
+	}
+	
 	
 	public HashMap<String, Object> getPurchaseList(SearchVO searchVO, String buyerId) throws Exception {
 		

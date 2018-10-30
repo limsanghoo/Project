@@ -31,10 +31,11 @@
 			totalPage += 1; 
 	}
 	
-
+	UserVO uvo=(UserVO)session.getAttribute("user");
 	String role="";
-	if(request.getSession().getAttribute("user")!=null) {
-		role=((UserVO)request.getSession().getAttribute("user")).getRole();
+
+	if(uvo != null) {
+		role=uvo.getRole();
 	}
 
 	%>
@@ -213,10 +214,32 @@ function fncGetProductList(){
 		<td align="left"><%= vo.getRegDate() %></td>
 		<td></td>
 	
-		<% if(role.equals("admin")) {%>
-				
-			<td aling="left">구매완료</td>
-			<% }%>
+		
+	
+			<td aling="left">
+		
+			<%if(vo.getProTranCode().trim().equals("0")) {%>
+			판매중 
+			<%}else { %>
+			재고없음
+			<% } %>
+			
+			<% if(role.equals("admin")) {%>
+			
+			<%if(vo.getProTranCode().trim().equals("1")){ %>
+			구매완료 <%if(menu.equals("manage")) {%>  
+			 <a href="/updateTranCodeByProd.do?prodNo=<%=vo.getProdNo() %>&tranCode=2">배송하기</a> <% } %>
+			<%}else if(vo.getProTranCode().trim().equals("2")) { %>
+			배송중 
+			<%}else if(vo.getProTranCode().trim().equals("3")) { %>
+			배송완료 
+			<%} %>
+		
+			</td>
+		
+		<%} %>
+			
+		
 	</tr>
 
 	<tr>

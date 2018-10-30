@@ -33,7 +33,7 @@ public class PurchaseServiceImpl implements PurchaseService {
 	@Override
 	public PurchaseVO getPurchase2(int ProdNo) throws Exception {
 		// TODO Auto-generated method stub
-		return null;
+		return dao.findPurchase2(ProdNo);
 	}
 	@Override
 	public HashMap<String, Object> getPurchaseList(SearchVO searchVO, String buyerId) throws Exception {

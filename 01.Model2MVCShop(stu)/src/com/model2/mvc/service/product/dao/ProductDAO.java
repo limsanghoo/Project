@@ -70,13 +70,13 @@ public class ProductDAO {
 		
 		Connection con = DBUtil.getConnection();
 		
-		String sql = "SELECT p.prod_no,p.prod_name,p.prod_detail,p.manufacture_day,p.price,p.image_file,p.reg_date,t.tran_status_code"
+		String sql = "SELECT p.prod_no,p.prod_name,p.prod_detail,p.manufacture_day,p.price,p.image_file,p.reg_date,NVL(t.tran_status_code, '0') tranCode"
 				+ " FROM product p,transaction t"
 				+ " WHERE p.prod_no=t.prod_no(+)";
 		
 		if (searchVO.getSearchCondition() != null) {
 			if (searchVO.getSearchCondition().equals("0")) {
-				sql += " where PROD_NO LIKE '%" + searchVO.getSearchKeyword()
+				sql += " where P.PROD_NO LIKE '%" + searchVO.getSearchKeyword()
 						+ "%'";
 			} else if (searchVO.getSearchCondition().equals("1")) {
 				sql += " where PROD_NAME LIKE '%" + searchVO.getSearchKeyword()
@@ -87,7 +87,7 @@ public class ProductDAO {
 			}
 		}
 		sql += " order by PROD_NAME";
-		
+		System.out.println("sql»Æ¿Œ :"+sql);
 		PreparedStatement stmt = 
 				con.prepareStatement(	sql,
 															ResultSet.TYPE_SCROLL_INSENSITIVE,
@@ -116,6 +116,11 @@ public class ProductDAO {
 					vo.setProdName(rs.getString("PROD_NAME"));
 					vo.setProdNo(rs.getInt("PROD_NO"));
 					vo.setRegDate(rs.getDate("REG_DATE"));
+					
+					System.out.println("========"+vo);
+					vo.setProTranCode(rs.getString("tranCode"));
+					
+					
 
 					list.add(vo);
 					if (!rs.next())

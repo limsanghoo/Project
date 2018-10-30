@@ -14,15 +14,12 @@ public class UpdateTranCodeAction extends Action {
 	public String execute(HttpServletRequest request, 
 																					HttpServletResponse response) throws Exception {
 		
-		int tranNo = Integer.parseInt(request.getParameter("tranNo"));
-		String tranCode = request.getParameter("tranCode");
+		PurchaseVO vo =(PurchaseVO)request.getAttribute("vo");
 		
 		PurchaseService service = new PurchaseServiceImpl();
-		PurchaseVO purchaseVO = service.getPurchase(tranNo);
 		
-		purchaseVO.setTranCode(tranCode);
-		service.updateTranCode(purchaseVO);
 		
+		service.updateTranCode(vo);
 		return "redirect:/listPurchase.do*";
 		
 	}
