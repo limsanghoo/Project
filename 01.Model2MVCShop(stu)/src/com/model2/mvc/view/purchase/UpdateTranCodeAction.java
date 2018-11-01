@@ -20,7 +20,7 @@ public class UpdateTranCodeAction extends Action {
 		
 		
 		service.updateTranCode(vo);
-		return "redirect:/listPurchase.do*";
+		return "redirect:/listPurchase.do";
 		
 	}
 

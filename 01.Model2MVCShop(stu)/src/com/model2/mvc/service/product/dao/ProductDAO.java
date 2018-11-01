@@ -86,7 +86,7 @@ public class ProductDAO {
 				+ "%'";
 			}
 		}
-		sql += " order by PROD_NAME";
+		sql += " order by PROD_NO";
 		System.out.println("sql»Æ¿Œ :"+sql);
 		PreparedStatement stmt = 
 				con.prepareStatement(	sql,

@@ -10,6 +10,8 @@ import java.util.List;
 
 import com.model2.mvc.common.SearchVO;
 import com.model2.mvc.common.util.DBUtil;
+import com.model2.mvc.service.product.ProductService;
+import com.model2.mvc.service.product.impl.ProductServiceImpl;
 import com.model2.mvc.service.product.vo.ProductVO;
 import com.model2.mvc.service.purchase.vo.PurchaseVO;
 import com.model2.mvc.service.user.UserService;
@@ -147,6 +149,7 @@ public class PurchaseDAO {
 			System.out.println("searchVO.getPage():" + searchVO.getPage());
 			System.out.println("searchVO.getPageUnit():" + searchVO.getPageUnit());
 			
+			ProductService proService = new ProductServiceImpl();
 			List<PurchaseVO> list = new ArrayList<PurchaseVO>();
 			if (total > 0) {
 				for (int i = 0; i < searchVO.getPageUnit(); i++) {
@@ -158,7 +161,7 @@ public class PurchaseDAO {
 					purchaseVO.setBuyer(buyer);
 					purchaseVO.setReceiverName(rs.getString("RECEIVER_NAME"));
 					purchaseVO.setReceiverPhone(rs.getString("RECEIVER_PHONE"));
-
+					purchaseVO.setPurchaseProd(proService.getProduct(rs.getInt("PROD_NO")));
 					purchaseVO.setDivyRequest(rs.getString("DLVY_REQUEST"));
 					purchaseVO.setTranCode(rs.getString("TRAN_STATUS_CODE"));
 

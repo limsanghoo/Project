@@ -220,7 +220,7 @@ function fncGetProductList(){
 		
 			<%if(vo.getProTranCode().trim().equals("0")) {%>
 			판매중 
-			<%}else { %>
+			<%}else if(role.equals("user") ){ %>
 			재고없음
 			<% } %>
 			

@@ -121,24 +121,32 @@
 		<td></td>			
 		
 		
+		<%System.out.println(purchaseVO.getTranCode()); %>
 	
 		<td align="left"> 
-		<%if(purchaseVO.getTranCode().trim().equals("0")){ %>
-		판매중
-		<%}else if(purchaseVO.getTranCode().trim().equals("1")){  %>
+	
+		<%if(purchaseVO.getTranCode().trim().equals("1")){  %>
 		현재 구매완료 상태입니다.
-		<%}else if(purchaseVO.getTranCode().equals("2")){ %>
+			
+		<%}else if(purchaseVO.getTranCode().trim().equals("2")){%>
 		현재 배송중 상태입니다.
-		<%}else { %>
+		<%}else{ %>
 		현재 배송완료 상태입니다.
-		
 		<%} %>
 		
 		
+	
+		
+	
+		
 		<td></td>
-		<td align="left"> <a href="/updateTranCodeByProd.do?prodNo=<%=purchaseVO.getPurchaseProd()%>&tranCode=3">물건도착</a>
+		<%if(purchaseVO.getTranCode().trim().equals("2")) { %>
+		<td align="left"> <a href="/updateTranCodeByProd.do?prodNo=<%=purchaseVO.getPurchaseProd().getProdNo()%>&tranCode=3">물건도착</a>
 	</tr>
+	<% } %>
 	 <% } %>
+	 
+	 
 	<tr>
 		<td colspan="11" bgcolor="D6D7D6" height="1"></td>
 	</tr>
