@@ -10,7 +10,7 @@ import org.springframework.stereotype.Repository;
 
 import com.model2.mvc.common.Search;
 import com.model2.mvc.service.domain.Purchase;
-import com.model2.mvc.service.product.PurchaseDao;
+import com.model2.mvc.service.purchase.PurchaseDao;
 
 @Repository("purchaseDaoImpl")
 public class PurchaseDaoImpl implements PurchaseDao {
@@ -25,23 +25,23 @@ public class PurchaseDaoImpl implements PurchaseDao {
 	public PurchaseDaoImpl() {
 		System.out.println(this.getClass());
 	}
-	
+
 	@Override
 	public Purchase getPurchase(int tranNo) throws Exception {
 		// TODO Auto-generated method stub
-		return sqlSession.selectOne("PurchaseMapper.getPurchase", tranNo);
+		return null;
 	}
 
 	@Override
 	public Purchase getPurchase2(int prodNo) throws Exception {
 		// TODO Auto-generated method stub
-		return sqlSession.selectOne("PurchaseMapper.getPurchase2", prodNo);
+		return null;
 	}
 
 	@Override
-	public List<String, Object> getPurchaseList(Search search, String buyerId) throws Exception {
-		
-		return sqlSession.selectList("PurchaseMapper.getPurchaseList", search);
+	public Map<String, Object> getPurchaseList(Search search, String buyerId) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	@Override
@@ -73,5 +73,7 @@ public class PurchaseDaoImpl implements PurchaseDao {
 		// TODO Auto-generated method stub
 		return null;
 	}
+	
+	
 
 }

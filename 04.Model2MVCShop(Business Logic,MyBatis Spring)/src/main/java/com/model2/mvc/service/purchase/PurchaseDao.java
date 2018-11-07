@@ -1,4 +1,4 @@
-package com.model2.mvc.service.product;
+package com.model2.mvc.service.purchase;
 
 import java.util.Map;
 
