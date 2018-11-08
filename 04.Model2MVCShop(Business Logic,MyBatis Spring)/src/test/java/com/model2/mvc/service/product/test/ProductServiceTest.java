@@ -39,7 +39,7 @@ public class ProductServiceTest {
 			product.setPrice(300000);
 			product.setFileName("이미지파일");
 			
-			
+		
 			productService.addProduct(product);
 			
 			

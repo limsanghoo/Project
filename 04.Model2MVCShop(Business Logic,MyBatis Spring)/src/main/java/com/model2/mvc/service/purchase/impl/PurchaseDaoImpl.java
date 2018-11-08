@@ -25,7 +25,7 @@ public class PurchaseDaoImpl implements PurchaseDao {
 	public PurchaseDaoImpl() {
 		System.out.println(this.getClass());
 	}
-
+/*
 	@Override
 	public Purchase getPurchase(int tranNo) throws Exception {
 		// TODO Auto-generated method stub
@@ -43,13 +43,12 @@ public class PurchaseDaoImpl implements PurchaseDao {
 		// TODO Auto-generated method stub
 		return null;
 	}
-
+*/
 	@Override
-	public void insertPurchase(Purchase purchase) throws Exception {
-		// TODO Auto-generated method stub
-		
+	public void addPurchase(Purchase purchase) throws Exception {
+		sqlSession.insert("PurchaseMapper.addPurchase", purchase);
 	}
-
+/*
 	@Override
 	public void updatePurchase(Purchase purchase) throws Exception {
 		// TODO Auto-generated method stub
@@ -74,6 +73,6 @@ public class PurchaseDaoImpl implements PurchaseDao {
 		return null;
 	}
 	
-	
+*/
 
 }

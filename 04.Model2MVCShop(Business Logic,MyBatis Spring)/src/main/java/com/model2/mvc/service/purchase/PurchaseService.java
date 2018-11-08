@@ -10,7 +10,7 @@ import com.model2.mvc.service.domain.Purchase;
 public interface PurchaseService {
 
 	public void addPurchase(Purchase purchase) throws Exception;
-	
+	/*
 	public Purchase getPurchase(int tranNo) throws Exception;
 	
 	public Purchase getPurchase2(int ProdNo) throws Exception;
@@ -22,5 +22,5 @@ public interface PurchaseService {
 	public void updatePurchase(Purchase purchase) throws Exception;
 	
 	public void updateTranCode(Purchase purchase) throws Exception;
-	
+	*/
 }

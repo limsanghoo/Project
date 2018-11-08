@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import com.model2.mvc.service.domain.Product;
 import com.model2.mvc.service.domain.Purchase;
 import com.model2.mvc.service.domain.User;
 import com.model2.mvc.service.product.ProductService;
@@ -23,20 +24,25 @@ import junit.framework.Assert;
 public class PurchaseServiceTest {
 	
 	@Autowired
-	@Qualifier("purchaseserviceImpl")
-	private PurchaseService purchaseSerivce;
+	@Qualifier("purchaseServiceImpl")
+	private PurchaseService purchaseService;
 	
 	
 	@Test
-	public void testInsertPurchase() throws Exception {
+	public void testAddPurchase() throws Exception {
 		
 	Purchase purchase = new Purchase();	
+	User user = new User();
+	Product product = new Product();
+	
+	product.setProdName("ÈÞ´ë¿ë¼±Ç³±â");
+	user.setUserId("user02");
+	
+	//purchase.setTranNo(10050);
 
-	UserService service = new UserServiceImpl();
-	User buyerId=service.getUser("userId");
-			
-	purchase.setBuyer(buyerId);
+	purchase.setBuyer(user);
 	purchase.setPaymentOption("2");
+	purchase.setPurchaseProd(product);
 	purchase.setReceiverName("ÀÓ»óÈÄ");
 	purchase.setReceiverPhone("010-1234-5678");
 	purchase.setDivyAddr("¼­¿ï½£");
@@ -44,6 +50,7 @@ public class PurchaseServiceTest {
 	purchase.setTranCode("0");
 	purchase.setDivyDate("2018-11-11");
 	
+	purchaseService.addPurchase(purchase);
 	
 	Assert.assertEquals("2", purchase.getPaymentOption());
 	Assert.assertEquals("ÀÓ»óÈÄ", purchase.getReceiverName());
